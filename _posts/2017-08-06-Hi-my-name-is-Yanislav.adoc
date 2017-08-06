@@ -1,0 +1,18 @@
+= Hi, my name is Yanislav!
+
+Hi, this will be my very first blog, so this will be some sort of explanation for its purpose and which audience it targets.
+
+I am currently _junior software developer_ at https://www.sbtech.com/[SBTech] a company for sports betting, I am 24 years old and I live in Sofia, but enough of me.
+
+This blog will be for software development(mostly, I can't predict the future) and it will have the purpose of explaining principles and interesting topics I've read in internet or heard from podcasts on my journey to work every day.
+
+While blogging, except the usuall tags that I will use I will use 5 different more in order for you to understand if this topic is suitable for you or not. They are borrowed from the https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition[Dreyfus model of skill acquisition] - read it , really good stuff - helped me a lot.
+
+Most of the examples will be from the `.NET framework` because this is what technology I am using when I am at work , and this is where I feel most comfortable, but I will try to be language agnostic.
+
+As you may have guessed by now I am not linguist so please don't mind the grammar ;)
+
+:published_at: 2017-06-08
+:hp-tags: Blog
+
+
