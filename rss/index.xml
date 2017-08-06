@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://kuskmen.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 06 Aug 2017 16:38:45 GMT</lastBuildDate><atom:link href="https://kuskmen.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Hi, my name is Yanislav!]]></title><description><![CDATA[<div class="paragraph">
+<p>Hi, this will be my very first blog, so this will be some sort of explanation for its purpose and which audience it targets.</p>
+</div>
+<div class="paragraph">
+<p>I am currently <em>junior software developer</em> at <a href="https://www.sbtech.com/">SBTech</a> a company for sports betting, I am 24 years old and I live in Sofia, but enough of me.</p>
+</div>
+<div class="paragraph">
+<p>This blog will be for software development(mostly, I can&#8217;t predict the future) and it will have the purpose of explaining principles and interesting topics I&#8217;ve read in internet or heard from podcasts on my journey to work every day.</p>
+</div>
+<div class="paragraph">
+<p>While blogging, except the usuall tags that I will use I will use 5 different more in order for you to understand if this topic is suitable for you or not. They are borrowed from the <a href="https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition">Dreyfus model of skill acquisition</a> - read it , really good stuff - helped me a lot.</p>
+</div>
+<div class="paragraph">
+<p>Most of the examples will be from the <code>.NET framework</code> because this is what technology I am using when I am at work , and this is where I feel most comfortable, but I will try to be language agnostic.</p>
+</div>
+<div class="paragraph">
+<p>As you may have guessed by now I am not linguist so please don&#8217;t mind the grammar ;)</p>
+</div>]]></description><link>https://kuskmen.github.io/2017/08/06/Hi-my-name-is-Yanislav.html</link><guid isPermaLink="true">https://kuskmen.github.io/2017/08/06/Hi-my-name-is-Yanislav.html</guid><dc:creator><![CDATA[Ianislav Vasilev]]></dc:creator><pubDate>Sun, 06 Aug 2017 00:00:00 GMT</pubDate></item></channel></rss>
