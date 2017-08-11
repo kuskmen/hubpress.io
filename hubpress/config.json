@@ -5,12 +5,12 @@
     "branch": "master"
   },
   "theme": {
-    "name": "casper"
+    "name": "ghostium"
   },
   "urls": {
     "site": "https://kuskmen.github.io",
     "hubpress": "https://kuskmen.github.io",
-    "theme": "//kuskmen.github.io/themes/casper",
+    "theme": "//kuskmen.github.io/themes/ghostium",
     "images": "https://kuskmen.github.io/images"
   },
   "initialisationConfigComponent": {
