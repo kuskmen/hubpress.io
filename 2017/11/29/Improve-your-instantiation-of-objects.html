@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Improve your instantiation of objects.</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Improve your instantiation of objects.">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Improve your instantiation of objects.">
+    <meta property="og:description" content="">
+
+    <!-- <meta name="twitter:site" content="">
+
+<meta name="twitter:creator" content="">
+
+<meta name="google-site-verification" content="">
+
+<meta property="fb:admins" content="">
+ -->
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="//fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="//kuskmen.github.io/themes/ghostium/assets/css/main.min.css?v=1511993784537"/>
+    <link rel="stylesheet" href="//kuskmen.github.io/themes/ghostium/assets/css/custom.css?v=1511993784537"/>
+    <link rel="stylesheet" href="//kuskmen.github.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1511993784537"/>
+
+
+
+
+    <script type="text/javascript">
+      var ga_ua = 'UA-XXXXX-X';
+      
+      var disqus_shortname = 'example';
+      
+      var enable_pjax = true;
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="//kuskmen.github.io/themes/ghostium/assets/js/head-scripts.min.js?v=1511993784537"></script>
+
+    <link rel="canonical" href="https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Improve your instantiation of objects." />
+    <meta property="og:description" content="Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue. Because we had so much test fixtures and each of them intantiating new  HTTP client(which can be heavy from time to time) we started to see that there are performance" />
+    <meta property="og:url" content="https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html" />
+    <meta property="article:published_time" content="2017-11-29T00:00:00.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Improve your instantiation of objects." />
+    <meta name="twitter:description" content="Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue. Because we had so much test fixtures and each of them intantiating new  HTTP client(which can be heavy from time to time) we started to see that there are performance" />
+    <meta name="twitter:url" content="https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "author": {
+        "@type": "Person",
+        "name": "Ianislav Vasilev",
+        "image": "https://avatars0.githubusercontent.com/u/710652?v=4",
+        "url": "https://kuskmen.github.io/author/kuskmen/"
+    },
+    "headline": "Improve your instantiation of objects.",
+    "url": "https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html",
+    "datePublished": "2017-11-29T00:00:00.000Z",
+    "description": "Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue. Because we had so much test fixtures and each of them intantiating new  HTTP client(which can be heavy from time to time) we started to see that there are performance"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://kuskmen.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+  </head>
+  <body class="post-template">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+    <nav tabindex="-1" class="drawer">
+      <div class="drawer-container">
+        <!--.drawer-search(role="search")-->
+        <ul role="navigation" class="drawer-list">
+          
+          <li class="drawer-list-item">
+            <a href="https://kuskmen.github.io" data-pjax>
+              <i class="fa fa-home"></i>Home
+            </a>
+          </li>
+          <!-- <li class="drawer-list-item">
+            <a href="https://kuskmen.github.io" title="" data-pjax>
+              <i class="fa fa-list-alt"></i>All posts
+            </a>
+          </li> -->
+          <li class="drawer-list-item">
+            <a href="https://kuskmen.github.io/rss/">
+              <i class="fa fa-rss"></i>Subscribe to Feed
+            </a>
+          </li>
+          <li class="drawer-list-divider"></li>
+          <li class="drawer-list-item drawer-list-title">
+            Follow me
+          </li>
+          
+          
+        </ul>
+      </div>
+    </nav>
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+<section class="wrapper wrapper-post">
+  <div class="wrapper-container">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post">
+        <section class="post-container">
+          <header class="post-header">
+            <ul class="post-meta-list">
+              <li class="post-meta-item">
+                <time datetime="2017-11-29" itemprop="datePublished">
+                  a day ago
+                </time>
+              </li>
+              <li class="post-meta-item">
+                <a href="#disqus_thread" data-disqus-identifier="">Comments</a>
+              </li>
+            </ul>
+            <h1 itemprop="name headline" class="post-title"><a href="https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html" itemprop="url" data-pjax title="Improve your instantiation of objects.">Improve your instantiation of objects.</a></h1>
+            <!--h2 itemprop="about" class="post-subtitle"></h2-->
+          </header>
+          <aside class="post-side">
+            <div class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img src="https://avatars0.githubusercontent.com/u/710652?v&#x3D;4" alt="Ianislav Vasilev">
+                </a>
+              <div class="post-author-info">
+                <a href="" class="post-author-name">
+                  Ianislav Vasilev
+                </a>
+                <p class="post-author-bio"></p>
+              </div>
+            </div>
+          </aside>
+          <div itemprop="articleBody" class="post-body">
+            <div class="paragraph">
+<p>Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue.</p>
+</div>
+<div class="paragraph">
+<p>Because we had so much test fixtures and each of them intantiating new  <em>HTTP</em> client(which can be heavy from time to time) we started to see that there are performance issues doing so. I&#8217;ve reserached a bit and noticed that this is common problem when you are creating new heavy objects frequently.Of course, there was already a solution to this - <strong><em>Object Pool pattern</em></strong>.</p>
+</div>
+<div class="paragraph">
+<p>Main benefits when using classic object pool pattern:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Re-uses objects that were already created</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>and this is huge, because lets say you work with objects that takes a while to build, which doesn&#8217;t actually captures state into it, why bother creating new instances everytime we need it instead of "caching" the instance somewhere?</p>
+</div>
+<div class="paragraph">
+<p>Some drawbacks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Object pool pattern is not intended for storage, so only some optimal number of instances is good (for instance number of your CPU cores is a good start) to have otherwise we go into the place where we use memory but never release, which is bad.</p>
+</li>
+<li>
+<p>Its implied that when you use instance of an object from the pool you will return it short, its ok if you use it longer than usuall but this only reduce the usefullness of the pool.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is one example object pool implementation in C#:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>public class ObjectPool&lt;T&gt; : IObjectPool&lt;T&gt; where T : class
+    {
+        private readonly Func&lt;T&gt; _factory;
+        private T _firstItem;
+        private readonly T[] _items;
+
+        public ObjectPool(Func&lt;T&gt; factory) : this(factory, Environment.ProcessorCount * 2) { }
+        public ObjectPool(Func&lt;T&gt; factory, int size)
+        {
+            Debug.Assert(size &gt;= 1);
+            _factory = factory;
+            _items = new T[size - 1];
+        }
+
+        public virtual T Allocate()
+        {
+            // Try to get first object first.
+            var inst = _firstItem;
+            if (inst == null || inst != Interlocked.CompareExchange(ref _firstItem, null, inst))
+            {
+                // If first is null simply search for the next non-null object in the items.
+                var items = _items;
+                for (var i = 0; i &lt; items.Length; i++)
+                {
+                    var inst2 = items[i];
+                    // return first object that we find it is not null
+                    if (inst2 != null &amp;&amp; inst2 == Interlocked.CompareExchange(ref items[i], null, inst2))
+                    {
+                        return inst2;
+                    }
+                }
+                // If we fail to find initialized object, create one ourselves.
+                return _factory();
+            }
+            // return instance of the first object (this is not null for sure).
+            return inst;
+        }
+        public virtual void Free(T obj)
+        {
+            Debug.Assert(obj != null);
+            Debug.Assert(obj != _firstItem);
+
+            // Try to return object as first first.
+            if (_firstItem == null)
+            {
+                _firstItem = obj;
+            }
+            // If we fail we return it to the next best place.
+            else
+            {
+                var items = _items;
+                for (var i = 0; i &lt; items.Length; i++)
+                {
+                    if (items[i] == null)
+                    {
+                        items[i] = obj;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public interface IObjectPool&lt;T&gt;
+    {
+        /// &lt;summary&gt;
+        ///  Produces an instance of &lt;see cref="T"/&gt;.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt; Newly created object of &lt;see cref="T"/&gt;. &lt;/returns&gt;
+        T Allocate();
+
+        /// &lt;summary&gt;
+        ///  Returns object to the pool.
+        /// &lt;/summary&gt;
+        /// &lt;param name="obj"&gt; Object to return. &lt;/param&gt;
+        void Free(T obj);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bottom line, Object Pool pattern is really powerful, but on the right place, you should definitely first identify the problem and then decide if to implement it.
+:published_at: 2017-11-30
+:hp-tags: Design-Patterns, C#, Advanced-Beginner,</p>
+</div>
+          </div>
+          <footer class="post-footer">
+            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img itemprop="image" src="https://avatars0.githubusercontent.com/u/710652?v&#x3D;4" alt="Ianislav Vasilev">
+                </a>
+              <div class="post-author-info">
+                <h4 class="post-footer-heading">Written By</h4>
+                <a href="" itemprop="url" class="post-author-name">
+                  <span itemprop="name">Ianislav Vasilev</span>
+                </a>
+                <p itemprop="description" class="post-author-bio"></p>
+                <p class="post-info">
+                  <b class="post-info-title">Published on</b>
+                  <time class="post-date">November 29, 2017</time>
+                </p>
+              </div>
+            </div>
+            <div class="post-social">
+              <h4 class="post-footer-heading">Spread the word</h4>
+              <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+              <a href="#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+              <a href="#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+            </div>
+          </footer>
+        </section>
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+    </article>
+
+    <footer role="contentinfo" class="footer">
+      <p><small>Copyright &copy; <span itemprop="copyrightHolder"></span>. 2017. All Rights Reserved.</small></p>
+      <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+      <p><small>Adapted by <a href="https://twitter.com/mgreau">Maxime Gréau</a></small></p>
+      <p><small>Published with <a href="http://hubpress.io">HubPress</a></small></p>
+    </footer>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+       
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    <script src="//kuskmen.github.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1511993784537"></script>
+
+
+  </body>
+</html>
