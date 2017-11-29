@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://kuskmen.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 29 Nov 2017 22:17:46 GMT</lastBuildDate><atom:link href="https://kuskmen.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Improve your instantiation of objects.]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://kuskmen.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 29 Nov 2017 22:20:06 GMT</lastBuildDate><atom:link href="https://kuskmen.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Improve your instantiation of objects.]]></title><description><![CDATA[<div class="paragraph">
 <p>Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue.</p>
 </div>
 <div class="paragraph">
@@ -115,9 +115,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Bottom line, Object Pool pattern is really powerful, but on the right place, you should definitely first identify the problem and then decide if to implement it.
-:published_at: 2017-11-30
-:hp-tags: Design-Patterns, C#, Advanced-Beginner</p>
+<p>Bottom line, Object Pool pattern is really powerful, but on the right place, you should definitely first identify the problem and then decide if to implement it.</p>
 </div>]]></description><link>https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html</link><guid isPermaLink="true">https://kuskmen.github.io/2017/11/29/Improve-your-instantiation-of-objects.html</guid><dc:creator><![CDATA[Ianislav Vasilev]]></dc:creator><pubDate>Wed, 29 Nov 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Hi, my name is Yanislav!]]></title><description><![CDATA[<div class="paragraph">
 <p>Hi, this will be my very first blog, so this will be some sort of explanation for its purpose and which audience it targets.</p>
 </div>
