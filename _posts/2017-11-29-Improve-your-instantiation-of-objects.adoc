@@ -1,0 +1,107 @@
+// = Your Blog title
+// See https://hubpress.gitbooks.io/hubpress-knowledgebase/content/ for information about the parameters.
+// :hp-image: /covers/cover.png
+// :published_at: 2019-01-31
+// :hp-tags: HubPress, Blog, Open_Source,
+// :hp-alt-title: My English Title
+= Improve your instantiation of objects.
+Doc Writer <ianislav_vasilev@abv.bg>
+
+Hi people, I was busy at work doing some automations stuff where we began to face rather interesing issue.
+
+Because we had so much test fixtures and each of them intantiating new  __HTTP__ client(which can be heavy from time to time) we started to see that there are performance issues doing so. I've reserached a bit and noticed that this is common problem when you are creating new heavy objects frequently.Of course, there was already a solution to this - *__Object Pool pattern__*.
+
+Main benefits when using classic object pool pattern:
+
+* Re-uses objects that were already created
+
+and this is huge, because lets say you work with objects that takes a while to build, which doesn't actually captures state into it, why bother creating new instances everytime we need it instead of "caching" the instance somewhere?
+
+Some drawbacks:
+
+* Object pool pattern is not intended for storage, so only some optimal number of instances is good (for instance number of your CPU cores is a good start) to have otherwise we go into the place where we use memory but never release, which is bad.
+* Its implied that when you use instance of an object from the pool you will return it short, its ok if you use it longer than usuall but this only reduce the usefullness of the pool.
+
+This is one example object pool implementation in C#:
+
+```
+public class ObjectPool<T> : IObjectPool<T> where T : class
+    {
+        private readonly Func<T> _factory;
+        private T _firstItem;
+        private readonly T[] _items;
+
+        public ObjectPool(Func<T> factory) : this(factory, Environment.ProcessorCount * 2) { }
+        public ObjectPool(Func<T> factory, int size)
+        {
+            Debug.Assert(size >= 1);
+            _factory = factory;
+            _items = new T[size - 1];
+        }
+
+        public virtual T Allocate()
+        {
+            // Try to get first object first.
+            var inst = _firstItem;
+            if (inst == null || inst != Interlocked.CompareExchange(ref _firstItem, null, inst))
+            {
+                // If first is null simply search for the next non-null object in the items.
+                var items = _items;
+                for (var i = 0; i < items.Length; i++)
+                {
+                    var inst2 = items[i];
+                    // return first object that we find it is not null
+                    if (inst2 != null && inst2 == Interlocked.CompareExchange(ref items[i], null, inst2))
+                    {
+                        return inst2;
+                    }
+                }
+                // If we fail to find initialized object, create one ourselves.
+                return _factory();
+            }
+            // return instance of the first object (this is not null for sure).
+            return inst;
+        }
+        public virtual void Free(T obj)
+        {
+            Debug.Assert(obj != null);
+            Debug.Assert(obj != _firstItem);
+
+            // Try to return object as first first.
+            if (_firstItem == null)
+            {
+                _firstItem = obj;
+            }
+            // If we fail we return it to the next best place.
+            else
+            {
+                var items = _items;
+                for (var i = 0; i < items.Length; i++)
+                {
+                    if (items[i] == null)
+                    {
+                        items[i] = obj;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public interface IObjectPool<T>
+    {
+        /// <summary>
+        ///  Produces an instance of <see cref="T"/>.
+        /// </summary>
+        /// <returns> Newly created object of <see cref="T"/>. </returns>
+        T Allocate();
+
+        /// <summary>
+        ///  Returns object to the pool.
+        /// </summary>
+        /// <param name="obj"> Object to return. </param>
+        void Free(T obj);
+    }
+```
+
+Bottom line, Object Pool pattern is really powerful, but on the right place, you should definitely first identify the problem and then decide if to implement it.
