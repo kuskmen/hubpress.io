@@ -105,3 +105,5 @@ public class ObjectPool<T> : IObjectPool<T> where T : class
 ```
 
 Bottom line, Object Pool pattern is really powerful, but on the right place, you should definitely first identify the problem and then decide if to implement it.
+:published_at: 2017-11-30
+:hp-tags: Design-Patterns, C#, Advanced-Beginner,
